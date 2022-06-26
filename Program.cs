@@ -53,7 +53,7 @@ namespace Time_Calculator
             custom_hour += (int)mins / HOUR;
             custom_mins += mins % HOUR;
             if (custom_mins >= HOUR) 
-            {
+            { // minutes cannot be greater than 60 so convert again to hours and get the remainder
                 custom_hour += (int)custom_mins / HOUR;
                 custom_mins = custom_mins % HOUR;
             }
@@ -64,14 +64,14 @@ namespace Time_Calculator
         {
             custom_mins -= mins % HOUR;
             if (custom_mins < 0)
-            {
+            { // minutes cannot be less than 0 so add 60 to normalize
                 custom_mins += HOUR;
-                custom_hour--;
+                custom_hour--; // decrement because minutes just became less than 0
             }
 
             custom_hour -= (int)mins / HOUR;
             if (custom_hour < 0)
-            {
+            { // hour cannot be less than zero
                 custom_hour += HALFDAY;
             }
             Console.WriteLine("Time will be: " + custom_hour + ":" + (custom_mins < 10 ? "0" + custom_mins : custom_mins));
